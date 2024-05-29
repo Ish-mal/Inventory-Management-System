@@ -1,9 +1,9 @@
 # Inventory-Management-System
 Ishmal Farooq, Ayesha Ayoub, Aleena Ansari, Maryam Hassan
+
 This C++ application is a basic inventory and sales management system. This is a synopsis of its structure and functionality:
 
 1. Product Class: Depicts a product together with its name, ID, quantity, and cost. It provides ways to extract specific properties and show product details.
-
 
 2. Inventory Class: Oversees an assortment of goods. It enables the inventory to be expanded and shows every item that is presently in stock.
 
