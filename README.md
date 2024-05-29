@@ -1,5 +1,5 @@
 # Inventory-Management-System
-Ishmal Farooq, Ayesha Ayoub, Aleena Ansari, Maryam Hassan
+Ishmal Farooq (2023-uam-4601), Ayesha Ayoub (2023-uam-4605), Aleena Ansari (2023-uam-4615), Maryam Hassan(2023-uam-4620)
 
 This C++ application is a basic inventory and sales management system. This is a synopsis of its structure and functionality:
 
