@@ -13,8 +13,10 @@ private:
     float price;
 
 public:
-    Product() {}
-    Product(int pId, string pName, int pQuantity, float pPrice) {
+Product(){
+
+}
+    Product(int pId, string pName, int pQuantity, float pPrice){
         id = pId;
         name = pName;
         quantity = pQuantity;
@@ -28,68 +30,23 @@ public:
         cout << "Quantity: " << quantity << endl;
     }
 
-    int getId() {
+    int getId(){
         return id;
     }
 
-    string getName() {
+    string getName(){
         return name;
     }
 
-    int getQuantity() {
+    int getQuantity(){
         return quantity;
     }
 
-    double getPrice() {
+    double getPrice(){
         return price;
     }
-};
 
-// Inventory class
-class Inventory {
-private:
-    Product stock[1500];
-    int ind = 0;
 
-public:
-    void addProduct() {
-        try {
-            int id, quantity;
-            double price;
-            string name;
-
-            cout << "Enter Product ID: ";
-            cin >> id;
-
-            cout << "Enter Product Name: ";
-            cin.ignore();
-            getline(cin, name);
-
-            cout << "Enter Quantity: ";
-            cin >> quantity;
-
-            cout << "Enter Price: ";
-            cin >> price;
-
-            Product product(id, name, quantity, price);
-            stock[ind] = product;
-            ind++;
-
-            cout << "Product added successfully." << endl;
-
-        } catch (const exception &e) {
-            cerr << "Error: " << e.what() << endl;
-        }
-    }
-
-    void displayProducts() const {
-        for (int i = 0; i < ind; i++) {
-            cout << endl << "==================" << endl;
-            cout << "Product: " << i + 1 << endl;
-            cout << "==================" << endl;
-            stock[i].display();
-        }
-    }
 };
 
 // Customer class
@@ -99,23 +56,25 @@ private:
     string address;
 
 public:
-    Customer() {}
+    Customer(){
 
-    Customer(string c_name, string c_address) {
+    }
+
+    Customer(string c_name, string c_address){
         name = c_name;
         address = c_address;
     }
 
-    void display() {
+    void display(){
         cout << endl << "Name: " << name << endl;
         cout << "Address: " << address << endl;
     }
 
-    string getName() {
+    string getName(){
         return name;
     }
 
-    string getAddress() {
+    string getEmail(){
         return address;
     }
 };
@@ -123,67 +82,124 @@ public:
 // Order class
 class Order {
 private:
+
     Customer cust;
-    Product orderedProducts[10];
-    int ind = 0;
+    Product orderedProduct;
 
-public:
-    Order() {}
+    public:
+    Order(){
 
-    void recordOrder() {
-        try {
-            string n, add;
-            cin.ignore();
-            cout << "Enter Customer name: ";
-            getline(cin, n);
-            cout << "Enter Customer Address: ";
-            getline(cin, add);
+}
 
-            Customer newCust(n, add);
-            cust = newCust;
+    void recordOrder(){
 
-            int id, quantity;
-            double price;
-            string name;
+        string n, add;
 
-            cout << "Enter Product ID: ";
-            cin >> id;
+        cin.ignore();
+        cout << "Enter Customer name: ";
+        getline(cin, n);
 
-            cout << "Enter Product Name: ";
-            cin.ignore();
-            getline(cin, name);
+        cout << "Enter Customer Address: ";
+        getline(cin, add);
 
-            cout << "Enter Quantity: ";
-            cin >> quantity;
+        Customer newCust(n, add);
+        cust = newCust;
 
-            cout << "Enter Price: ";
-            cin >> price;
+        int id, quantity;
+        float price;
+        string name;
 
-            Product product(id, name, quantity, price); // initializing an object product
-            orderedProducts[ind] = product; // copying product into array of orderedProducts
+        cout << "Enter Product ID: ";
+        cin >> id;
+        cout << "Enter Product Name: ";
+        cin.ignore();
+        getline(cin, name);
 
-            ind++;
+        cout << "Enter Quantity: ";
+        cin >> quantity;
 
-            cout << "Order recorded successfully." << endl;
+        cout << "Enter Price: ";
+        cin >> price;
 
-        } catch (const exception &e) {
-            cerr << "Error: " << e.what() << endl;
-        }
+        Product product(id, name, quantity, price); // initializing an object product
+
+        orderedProduct = product; // copying product into array of orderedProducts
+
     }
 
-    void display() {
+    void display(){
         cust.display();
-        cout << "Ordered Products:" << endl;
-        for (int i = 0; i < ind; i++) {
-            cout << i + 1 << ". " << orderedProducts[i].getName() << " :- $" << orderedProducts[i].getPrice() << endl;
-        }
+        cout << "OrderProduct:" << endl;
+            cout << orderedProduct.getName() << " :- $" << orderedProduct.getPrice();
+            cout << "(" << orderedProduct.getQuantity() << ")" << endl;
     }
 };
 
-int main() {
-    Inventory inventory;
+// Inventory class
+class Inventory {
+private:
+    Product stock[1500]; // total capcity of our stock to store product
+    int ind = 0; // number of products in our stock
+
     Order saleOrders[50];
     int i_or = 0;
+
+
+public:
+    void addProduct(){
+        int id, quantity;
+        float price;
+        string name;
+
+        cout << "Enter Product ID: ";
+        cin >> id;
+
+        cout << "Enter Product Name: ";
+        cin.ignore();
+        getline(cin, name);
+
+        cout << "Enter Quantity: ";
+        cin >> quantity;
+
+        cout << "Enter Price: ";
+        cin >> price;
+
+        Product product(id, name, quantity, price); // created a product
+        stock[ind] = product; // saving a product in stock
+
+        ind++;
+        
+    }
+
+    void displayProducts(){
+        for(int i=0; i<ind; i++){
+            cout << endl << "==================" << endl;
+            cout << "Product: " << i+1 << endl;
+            cout << "==================" << endl;
+            stock[i].display();
+        }
+    }
+
+    void recordOrder1(){
+        saleOrders[i_or].recordOrder();
+        i_or++;
+    }
+
+    void displayOrders(){
+        for(int i=0; i<i_or; i++){
+            cout << endl << "==============" << endl;
+            cout << "Sale Order: " << i+1 << endl;
+            cout << "==============";
+            saleOrders[i].display();
+        }
+    }
+
+
+};
+
+int main(){
+
+    Inventory inventory;
     int choice;
 
     do {
@@ -197,42 +213,35 @@ int main() {
         cout << endl << "Enter your choice: ";
         cin >> choice;
 
-        try {
-            switch (choice) {
-                case 1:
-                    inventory.addProduct();
-                    break;
+        switch (choice) {
+            case 1:
+                inventory.addProduct();
+                break;
 
-                case 2:
-                    inventory.displayProducts();
-                    break;
+            case 2:
+                inventory.displayProducts();
+                break;
+            
+            case 3:
+                inventory.recordOrder1();
+                break;
 
-                case 3:
-                    saleOrders[i_or].recordOrder();
-                    i_or++;
-                    break;
+            case 4:
+                inventory.displayOrders();
+                break;
 
-                case 4:
-                    for (int i = 0; i < i_or; i++) {
-                        cout << endl << "==============" << endl;
-                        cout << "Sale Order: " << i + 1 << endl;
-                        cout << "==============";
-                        saleOrders[i].display();
-                    }
-                    break;
-
-                case 0:
-                    cout << "Exiting..." << endl;
-                    break;
-
-                default:
-                    throw invalid_argument("Invalid choice");
+            case 0: {
+                cout << "Exiting..." << endl;
+                break;
             }
-        } catch (const exception &e) {
-            cerr << "Error: " << e.what() << endl;
+
+            default: {
+                cout << "Invalid choice. . . !" << endl;
+                break;
+            }
         }
-
-    } while (choice != 0);
-
+    
+    }while (choice != 0); 
+    
     return 0;
 }
